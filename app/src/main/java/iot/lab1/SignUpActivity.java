@@ -27,6 +27,10 @@ public class SignUpActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.sign_up_toolbar);
         setSupportActionBar(toolbar);
 
+        EmailValidator emailValidator = new EmailValidator();
+        PasswordValidator passwordValidator = new PasswordValidator();
+        ConfirmPasswordValidator confirmPasswordValidator = new ConfirmPasswordValidator();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -44,30 +48,29 @@ public class SignUpActivity extends AppCompatActivity {
                 String email_value = email.getText().toString();
                 String password_one_value = password_one.getText().toString();
                 String password_two_value = password_two.getText().toString();
-                Helper helper = new Helper();
                 boolean valid = true;
 
-                if (name_value.length() == 0) {
+                if (name_value.isEmpty()) {
                     name.setError("Please enter your name");
                     valid = false;
                 }
 
-                if (!helper.isEmailValid(email_value)) {
+                if (emailValidator.validate(email_value)) {
                     email.setError("Please enter valid email");
                     valid = false;
                 }
 
-                if (password_one_value.length() <= 8) {
+                if (passwordValidator.validate(password_one_value)) {
                     password_one.setError("Password should contain more than 8 symbols");
                     valid = false;
                 }
 
-                if (password_two_value.length() <= 8) {
+                if (passwordValidator.validate(password_two_value)) {
                     password_two.setError("Password should contain more than 8 symbols");
                     valid = false;
                 }
 
-                if (!password_two_value.equals(password_one_value)) {
+                if (confirmPasswordValidator.validate(password_one_value, password_two_value)) {
                     password_two.setError("Passwords do not match");
                     valid = false;
                 }

@@ -23,20 +23,23 @@ public class SignInActivity extends AppCompatActivity {
         Button sign_in = findViewById(R.id.sign_in_button);
         TextView sign_up_nav = findViewById(R.id.sign_up_nav);
 
+        EmailValidator emailValidator = new EmailValidator();
+        PasswordValidator passwordValidator = new PasswordValidator();
+        ConfirmPasswordValidator confirmPasswordValidator = new ConfirmPasswordValidator();
+
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email_value = email.getText().toString();
                 String password_value = password.getText().toString();
-                Helper helper = new Helper();
                 boolean valid = true;
 
-                if (!helper.isEmailValid(email_value)) {
+                if (emailValidator.validate(email_value)) {
                     email.setError("Please enter a valid email!");
                     valid = false;
                 }
 
-                if (password_value.length() <= 8) {
+                if (passwordValidator.validate(password_value)) {
                     password.setError("Password should contain more than 8 symbols");
                     valid = false;
                 }
