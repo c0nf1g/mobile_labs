@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ui_spacing_half">4dp</dimen>
+    <dimen name="ui_spacing_single">8dp</dimen>
+    <dimen name="ui_spacing_double">16dp</dimen>
+    <dimen name="toolbar_text_size">20sp</dimen>
+</resources>
