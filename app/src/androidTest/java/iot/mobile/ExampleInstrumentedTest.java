@@ -1,4 +1,4 @@
-package iot.lab1;
+package iot.mobile;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("iot.lab1", appContext.getPackageName());
+        assertEquals("iot.iot.iot.iot.mobile.lab.iot.iot.mobile", appContext.getPackageName());
     }
 }

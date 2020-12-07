@@ -1,4 +1,4 @@
-package iot.lab1;
+package iot.mobile;
 
 import org.junit.Test;
 
