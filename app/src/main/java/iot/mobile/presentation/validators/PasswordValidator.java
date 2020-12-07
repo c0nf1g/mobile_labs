@@ -1,4 +1,4 @@
-package iot.mobile.validators;
+package iot.mobile.presentation.validators;
 
 public class PasswordValidator implements ICredentialValidator {
     private final static int PASSWORD_MIN_LENGTH = 8;

@@ -1,4 +1,4 @@
-package iot.mobile.fragments;
+package iot.mobile.presentation.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,12 +20,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.jetbrains.annotations.NotNull;
 
 import iot.mobile.R;
-import iot.mobile.viewModels.SignUpViewModel;
+import iot.mobile.presentation.callbacks.SignUpListener;
+import iot.mobile.presentation.viewModels.SignUpViewModel;
 
 public class SignUpFragment extends Fragment {
     private SignUpViewModel signUpViewModel;
-    private OnSignUpClickedListener onSignUpClickedListener;
-    private OnSignInNavClickedListener onSignInNavClickedListener;
+    private SignUpListener onSignUpClickedListener;
+    private SignUpListener onSignInNavClickedListener;
     private TextInputLayout textInputLayoutName;
     private TextInputLayout textInputLayoutEmailAddress;
     private TextInputLayout textInputLayoutPasswordOne;
@@ -50,20 +51,12 @@ public class SignUpFragment extends Fragment {
         onSignInNavClickedListener.onSignInNavClicked();
     };
 
-    public interface OnSignUpClickedListener {
-        public void onSignUpClicked();
-    }
-
-    public interface OnSignInNavClickedListener {
-        public void onSignInNavClicked();
-    }
-
     @Override
     public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         try {
-            onSignUpClickedListener = (OnSignUpClickedListener) context;
-            onSignInNavClickedListener = (OnSignInNavClickedListener) context;
+            onSignUpClickedListener = (SignUpListener) context;
+            onSignInNavClickedListener = (SignUpListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnSignUpClickedListener");
         }
@@ -117,7 +110,7 @@ public class SignUpFragment extends Fragment {
     }
 
     private void checkIsUserExist() {
-        signUpViewModel.getIsUserExist().observe(this, isUserExist -> {
+        signUpViewModel.getIsUserExist().observe(getViewLifecycleOwner(), isUserExist -> {
             if (isUserExist) {
                 showToast("User with this email already exists!");
             }
@@ -125,7 +118,7 @@ public class SignUpFragment extends Fragment {
     }
 
     private void checkIsSignedUp() {
-        signUpViewModel.getIsSignedUp().observe(this, isSignedUp -> {
+        signUpViewModel.getIsSignedUp().observe(getViewLifecycleOwner(), isSignedUp -> {
             if (isSignedUp) {
                 showAlertDialog("Registration is successful!");
             } else {
@@ -135,7 +128,7 @@ public class SignUpFragment extends Fragment {
     }
 
     private void checkInputFields() {
-        signUpViewModel.getLiveData().observe(this, liveDataMap -> {
+        signUpViewModel.getLiveData().observe(getViewLifecycleOwner(), liveDataMap -> {
             textInputLayoutEmailAddress.setErrorEnabled(false);
             textInputLayoutPasswordOne.setErrorEnabled(false);
             textInputLayoutPasswordTwo.setErrorEnabled(false);

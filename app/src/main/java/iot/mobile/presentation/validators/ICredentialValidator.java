@@ -1,4 +1,4 @@
-package iot.mobile.validators;
+package iot.mobile.presentation.validators;
 
 public interface ICredentialValidator {
     boolean isValid(String args);

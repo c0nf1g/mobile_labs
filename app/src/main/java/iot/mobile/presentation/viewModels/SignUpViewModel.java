@@ -1,4 +1,4 @@
-package iot.mobile.viewModels;
+package iot.mobile.presentation.viewModels;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,9 +9,9 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import java.util.HashMap;
 import java.util.Map;
 
-import iot.mobile.validators.EmailValidator;
-import iot.mobile.validators.ICredentialValidator;
-import iot.mobile.validators.PasswordValidator;
+import iot.mobile.presentation.validators.EmailValidator;
+import iot.mobile.presentation.validators.ICredentialValidator;
+import iot.mobile.presentation.validators.PasswordValidator;
 import timber.log.Timber;
 
 public class SignUpViewModel extends ViewModel {
