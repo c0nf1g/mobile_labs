@@ -1,5 +1,6 @@
-package iot.mobile.activities;
+package iot.mobile.presentation;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,15 +8,16 @@ import android.os.Bundle;
 
 import iot.mobile.BuildConfig;
 import iot.mobile.R;
-import iot.mobile.fragments.SignInFragment;
-import iot.mobile.fragments.SignUpFragment;
+import iot.mobile.presentation.activities.StartScreenActivity;
+import iot.mobile.presentation.callbacks.SignInListener;
+import iot.mobile.presentation.callbacks.SignUpListener;
+import iot.mobile.presentation.fragments.SignInFragment;
+import iot.mobile.presentation.fragments.SignUpFragment;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements
-        SignInFragment.OnSignUpNavClickedListener,
-        SignInFragment.OnSignInClickedListener,
-        SignUpFragment.OnSignUpClickedListener,
-        SignUpFragment.OnSignInNavClickedListener {
+        SignInListener,
+        SignUpListener {
 
     private SignUpFragment signUpFragment;
     private SignInFragment signInFragment;
@@ -28,6 +30,12 @@ public class MainActivity extends AppCompatActivity implements
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+
+        OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {}
+        };
+        getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 
         signInFragment = new SignInFragment();
         signUpFragment = new SignUpFragment();

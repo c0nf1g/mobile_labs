@@ -1,14 +1,13 @@
-package iot.mobile.activities;
+package iot.mobile.presentation.activities;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
 import iot.mobile.R;
-import iot.mobile.fragments.StartScreenFragment;
+import iot.mobile.presentation.fragments.NewsFragment;
 
 public class StartScreenActivity extends AppCompatActivity {
+    private NewsFragment newsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +20,10 @@ public class StartScreenActivity extends AppCompatActivity {
         };
         getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 
+        newsFragment = new NewsFragment();
+
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.startScreenContainer, new StartScreenFragment())
+                .add(R.id.start_activity_container, newsFragment)
                 .commit();
     }
 }

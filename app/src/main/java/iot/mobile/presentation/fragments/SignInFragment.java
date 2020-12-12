@@ -1,4 +1,4 @@
-package iot.mobile.fragments;
+package iot.mobile.presentation.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,12 +20,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.jetbrains.annotations.NotNull;
 
 import iot.mobile.R;
-import iot.mobile.viewModels.SignInViewModel;
+import iot.mobile.presentation.callbacks.SignInListener;
+import iot.mobile.presentation.viewModels.SignInViewModel;
 
 public class SignInFragment extends Fragment {
     private SignInViewModel signInViewModel;
-    private OnSignUpNavClickedListener onSignUpNavClickedListener;
-    private OnSignInClickedListener onSignInClickedListener;
+    private SignInListener onSignUpNavClickedListener;
+    private SignInListener onSignInClickedListener;
     private TextInputLayout textInputLayoutEmailAddress;
     private TextInputLayout textInputLayoutPassword;
     private TextInputEditText textInputEditTextEmailAddress;
@@ -44,14 +45,6 @@ public class SignInFragment extends Fragment {
         onSignUpNavClickedListener.onSignUpNavClicked();
     };
 
-    public interface OnSignUpNavClickedListener {
-        public void onSignUpNavClicked();
-    }
-
-    public interface OnSignInClickedListener {
-        public void onSignInClicked();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +54,8 @@ public class SignInFragment extends Fragment {
     public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         try {
-            onSignUpNavClickedListener = (OnSignUpNavClickedListener) context;
-            onSignInClickedListener = (OnSignInClickedListener) context;
+            onSignUpNavClickedListener = (SignInListener) context;
+            onSignInClickedListener = (SignInListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnSignUpNavClickedListener");
         }
@@ -108,7 +101,7 @@ public class SignInFragment extends Fragment {
     }
 
     private void checkIsUserExist() {
-        signInViewModel.getIsUserExist().observe(this, isUserExist -> {
+        signInViewModel.getIsUserExist().observe(getViewLifecycleOwner(), isUserExist -> {
             if (!isUserExist) {
                 showToast("User with this email doesn't exist!");
             }
@@ -116,7 +109,7 @@ public class SignInFragment extends Fragment {
     }
 
     private void checkIsLoggedIn() {
-        signInViewModel.getIsLoggedIn().observe(this, isLoggedIn -> {
+        signInViewModel.getIsLoggedIn().observe(getViewLifecycleOwner(), isLoggedIn -> {
             if (isLoggedIn) {
                 showAlertDialog("Login is successful!");
             } else {
@@ -126,7 +119,7 @@ public class SignInFragment extends Fragment {
     }
 
     private void checkIsCredentialWrong() {
-        signInViewModel.getIsCredentialWrong().observe(this, isCredentialWrong -> {
+        signInViewModel.getIsCredentialWrong().observe(getViewLifecycleOwner(), isCredentialWrong -> {
             if (isCredentialWrong) {
                 showToast("Email or password are incorrect");
             }
@@ -134,7 +127,7 @@ public class SignInFragment extends Fragment {
     }
 
     private void checkInputFields() {
-        signInViewModel.getLiveData().observe(this, liveDataMap -> {
+        signInViewModel.getLiveData().observe(getViewLifecycleOwner(), liveDataMap -> {
             textInputLayoutEmailAddress.setErrorEnabled(false);
             textInputLayoutPassword.setErrorEnabled(false);
 
