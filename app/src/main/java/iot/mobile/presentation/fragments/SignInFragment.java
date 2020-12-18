@@ -20,6 +20,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.jetbrains.annotations.NotNull;
 
 import iot.mobile.R;
+import iot.mobile.presentation.SharedPreferens.SharedPrefs;
 import iot.mobile.presentation.callbacks.SignInListener;
 import iot.mobile.presentation.viewModels.SignInViewModel;
 
@@ -103,7 +104,7 @@ public class SignInFragment extends Fragment {
     private void checkIsUserExist() {
         signInViewModel.getIsUserExist().observe(getViewLifecycleOwner(), isUserExist -> {
             if (!isUserExist) {
-                showToast("User with this email doesn't exist!");
+                showToast(getString(R.string.user_exists_error));
             }
         });
     }
@@ -111,7 +112,11 @@ public class SignInFragment extends Fragment {
     private void checkIsLoggedIn() {
         signInViewModel.getIsLoggedIn().observe(getViewLifecycleOwner(), isLoggedIn -> {
             if (isLoggedIn) {
-                showAlertDialog("Login is successful!");
+                SharedPrefs sharedPrefs = new SharedPrefs();
+                sharedPrefs.init(getActivity());
+                sharedPrefs.setUser(textInputEditTextEmailAddress.getText().toString());
+
+                showAlertDialog(getString(R.string.login_successfull_message));
             } else {
                 showToast("Could not sign in!");
             }
@@ -121,7 +126,7 @@ public class SignInFragment extends Fragment {
     private void checkIsCredentialWrong() {
         signInViewModel.getIsCredentialWrong().observe(getViewLifecycleOwner(), isCredentialWrong -> {
             if (isCredentialWrong) {
-                showToast("Email or password are incorrect");
+                showToast(getString(R.string.email_or_password_incorrect_error));
             }
         });
     }
@@ -133,10 +138,10 @@ public class SignInFragment extends Fragment {
 
             if (!liveDataMap.get("isValid")) {
                 if (!liveDataMap.get("isValidEmail")) {
-                    textInputLayoutEmailAddress.setError("Please enter a valid email!");
+                    textInputLayoutEmailAddress.setError(getString(R.string.enter_valid_email_message));
                 }
                 if (!liveDataMap.get("isValidPassword")) {
-                    textInputLayoutPassword.setError("Password is incorrect");
+                    textInputLayoutPassword.setError(getString(R.string.password_incorrect_error));
                 }
             }
         });
@@ -145,7 +150,7 @@ public class SignInFragment extends Fragment {
     private void showAlertDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(message);
-        builder.setTitle("Info");
+        builder.setTitle(R.string.info_title);
         builder.setPositiveButton("OK", (dialog, which) -> {
             onSignInClickedListener.onSignInClicked();
             dialog.dismiss();

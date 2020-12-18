@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="iot.mobile">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -11,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".presentation.activities.StartScreenActivity">
-        </activity>
+
+        <activity
+            android:name=".presentation.activities.ArticleActivity"
+            android:label="@string/title_activity_article"></activity>
+        <activity android:name=".presentation.activities.StartScreenActivity" />
         <activity
             android:name=".presentation.MainActivity"
             android:configChanges="orientation|screenSize">

@@ -1,6 +1,7 @@
 package iot.mobile.presentation.holders;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,16 +25,14 @@ public class NewsViewHolder extends BaseViewHolder<NewsViewData> {
         author = itemView.findViewById(R.id.news_author);
         title = itemView.findViewById(R.id.news_title);
         description = itemView.findViewById(R.id.news_description);
-
         articlePhoto = itemView.findViewById(R.id.news_photo);
     }
 
-    @Override
     public void bindTo(NewsViewData newsViewData) {
         if (newsViewData != null) {
-            author.setText(newsViewData.getName());
-            title.setText(newsViewData.getLogin());
-            description.setText(newsViewData.getGender());
+            author.setText(newsViewData.getAuthor());
+            title.setText(newsViewData.getTitle());
+            description.setText(newsViewData.getDescription());
 
             Glide.with(articlePhoto.getContext())
                     .load(newsViewData.getPhotoUrl())

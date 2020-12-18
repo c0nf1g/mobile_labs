@@ -4,4 +4,21 @@
     <dimen name="ui_spacing_single">8dp</dimen>
     <dimen name="ui_spacing_double">16dp</dimen>
     <dimen name="toolbar_text_size">20sp</dimen>
+    <!--
+    Because the window insets on round devices are larger than 15dp, this padding only applies
+    to square screens.
+    -->
+    <dimen name="box_inset_layout_padding">0dp</dimen>
+
+    <!--
+    This padding applies to both square and round screens. The total padding between the buttons
+    and the window insets is box_inset_layout_padding (above variable) on square screens and
+    inner_frame_layout_padding (below variable) on round screens.
+    -->
+    <dimen name="inner_frame_layout_padding">5dp</dimen>
+    <dimen name="article_image_layout_height">300dp</dimen>
+    <dimen name="swipe_refresh_layout_margin_top">60dp</dimen>
+    <dimen name="profile_layout_margin">10dp</dimen>
+    <dimen name="new_password_text_size">20sp</dimen>
+    <dimen name="card_image_layout_height">200dp</dimen>
 </resources>

@@ -11,12 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iot.mobile.R;
+import iot.mobile.presentation.callbacks.NewsListener;
 import iot.mobile.presentation.uiData.NewsViewData;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     private final List<NewsViewData> newsList = new ArrayList<>();
+    private NewsListener listener;
 
-    public void setItems(List<NewsViewData>  newsList) {
+    public void setListener(NewsListener listener) {
+        this.listener = listener;
+    }
+
+    public void setItems(List<NewsViewData> newsList) {
         this.newsList.clear();
         this.newsList.addAll(newsList);
         notifyDataSetChanged();
@@ -32,6 +38,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder viewHolder, int position) {
         viewHolder.bindTo(newsList.get(position));
+        viewHolder.itemView.setOnClickListener(view -> {
+            listener.onNewsItemClick(newsList.get(position));
+        });
     }
 
     @Override

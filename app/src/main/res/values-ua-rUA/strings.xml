@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">LAB1</string>
+    <string name="sign_in_label">Увійти</string>
+    <string name="password_hint">Пароль</string>
+    <string name="email_hint">Пошта</string>
+    <string name="name_hint">Ім\'я</string>
+    <string name="sign_up_label">Зареєструватись</string>
+    <string name="language">Мова</string>
+    <string name="news">Новини</string>
+    <string name="my_profile">Мій профіль</string>
+    <string name="change_password">Змінити пароль</string>
+    <string name="new_password">Новий пароль</string>
+    <string name="submit">Підтвердити</string>
+    <string name="back">Назад</string>
+    <string name="log_out">Вийти</string>
+    <string name="user_exists_error">Користувач з цим ім\'ям вже існує!</string>
+    <string name="login_successfull_message">Вхід успішний!</string>
+    <string name="email_or_password_incorrect_error">Пошта або пароль не правильні!</string>
+    <string name="enter_valid_email_message">Будь ласка введіть коректну пошту</string>
+    <string name="password_incorrect_error">Пароль не правильний</string>
+    <string name="info_title">Інфо</string>
+</resources>

@@ -5,7 +5,19 @@
     <string name="email_hint">Email</string>
     <string name="name_hint">Name</string>
     <string name="sign_up_label">Sign Up</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hello_on_start_screen">Hello on Start Screen</string>
+    <string name="language">Language</string>
+    <string name="title_activity_article">ArticleActivity</string>
+    <string name="news">News</string>
+    <string name="my_profile">My Profile</string>
+    <string name="change_password">Change password</string>
+    <string name="new_password">New password</string>
+    <string name="submit">Submit</string>
+    <string name="back">Back</string>
+    <string name="log_out">Log Out</string>
+    <string name="user_exists_error">User with this email doesn\'t exist!</string>
+    <string name="login_successfull_message">Login is successful!</string>
+    <string name="email_or_password_incorrect_error">Email or password are incorrect</string>
+    <string name="enter_valid_email_message">Please enter a valid email!</string>
+    <string name="password_incorrect_error">Password is incorrect</string>
+    <string name="info_title">Info</string>
 </resources>

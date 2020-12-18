@@ -1,41 +1,64 @@
 package iot.mobile.presentation.uiData;
 
-public class NewsViewData {
-    private String name;
-    private String login;
-    private String gender;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class NewsViewData implements Parcelable {
+    private String author;
+    private String title;
+    private String description;
+    private String content;
 
     private String photoUrl;
 
-    public NewsViewData(String name, String login, String gender, String photoUrl) {
-        this.name = name;
-        this.login = login;
-        this.gender = gender;
+    public NewsViewData(String author, String title, String description,
+                        String photoUrl, String content) {
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.content = content;
         this.photoUrl = photoUrl;
     }
 
-    public String getName() {
-        return name;
+    public NewsViewData(Parcel in) {
+
+        author = in.readString();
+        title = in.readString();
+        description = in.readString();
+        content = in.readString();
+        photoUrl = in.readString();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAuthor() {
+        return author;
     }
 
-    public String getLogin() {
-        return login;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getTitle() {
+        return title;
     }
 
-    public String getGender() {
-        return gender;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getPhotoUrl() {
@@ -44,5 +67,31 @@ public class NewsViewData {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public static final Creator<NewsViewData> CREATOR = new Parcelable.Creator<NewsViewData>() {
+        @Override
+        public NewsViewData createFromParcel(Parcel in) {
+            return new NewsViewData(in);
+        }
+
+        @Override
+        public NewsViewData[] newArray(int size) {
+            return new NewsViewData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(author);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(content);
+        dest.writeString(photoUrl);
     }
 }

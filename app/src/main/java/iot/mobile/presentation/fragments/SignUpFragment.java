@@ -1,6 +1,7 @@
 package iot.mobile.presentation.fragments;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -8,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Locale;
 
 import iot.mobile.R;
 import iot.mobile.presentation.callbacks.SignUpListener;
@@ -37,6 +41,7 @@ public class SignUpFragment extends Fragment {
     private TextInputEditText textInputEditTextPasswordTwo;
     private Button signUp;
     private Toolbar toolbarSignUp;
+
 
     private final View.OnClickListener onSignUpClickListener = view -> {
         String name = textInputEditTextName.getText().toString();
@@ -81,6 +86,7 @@ public class SignUpFragment extends Fragment {
         View signUpView = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         initUI(signUpView);
+
         signUp.setOnClickListener(onSignUpClickListener);
         toolbarSignUp.setNavigationOnClickListener(onToolbarSignUpClickListener);
 

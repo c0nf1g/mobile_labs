@@ -17,7 +17,8 @@ public class NewsMapper implements Function<NewsData, List<NewsViewData>> {
                     item.getAuthor(),
                     item.getTitle(),
                     item.getDescription(),
-                    item.getUrlToImage());
+                    item.getUrlToImage(),
+                    item.getContent());
             result.add(newsViewData);
         }
 
