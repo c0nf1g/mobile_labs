@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="8dp"
+    app:cardCornerRadius="@dimen/ui_spacing_half"
+    app:cardElevation="@dimen/ui_spacing_single"
     android:layout_marginBottom="@dimen/ui_spacing_single"
     android:layout_marginStart="@dimen/ui_spacing_single"
     android:layout_marginEnd="@dimen/ui_spacing_single">
@@ -18,7 +18,8 @@
         <ImageView
             android:id="@+id/news_photo"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_height="@dimen/card_image_layout_height"
             android:src="@drawable/ic_launcher_background" />
 
         <LinearLayout
@@ -29,21 +30,24 @@
 
             <TextView
                 android:id="@+id/news_author"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Orest" />
+                tools:text="Orest"
+                android:layout_marginBottom="@dimen/ui_spacing_single"/>
 
             <TextView
                 android:id="@+id/news_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Title" />
+                tools:text="Title"
+                android:layout_marginBottom="@dimen/ui_spacing_single"/>
 
             <TextView
                 android:id="@+id/news_description"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Description" />
+                tools:text="Description"
+                android:layout_marginBottom="@dimen/ui_spacing_single"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

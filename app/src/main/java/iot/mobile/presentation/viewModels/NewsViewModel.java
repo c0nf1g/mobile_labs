@@ -40,8 +40,6 @@ public class NewsViewModel extends ViewModel {
         );
     }
 
-
-
     @Override
     protected void onCleared() {
         super.onCleared();

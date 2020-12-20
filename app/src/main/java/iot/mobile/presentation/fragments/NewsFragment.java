@@ -1,18 +1,25 @@
 package iot.mobile.presentation.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
+
 import iot.mobile.R;
+import iot.mobile.presentation.callbacks.NewsListener;
 import iot.mobile.presentation.factories.ViewModelFactory;
 import iot.mobile.presentation.holders.NewsAdapter;
 import iot.mobile.presentation.viewModels.NewsViewModel;
@@ -21,6 +28,32 @@ import timber.log.Timber;
 public class NewsFragment extends Fragment {
     private RecyclerView newsList;
     private NewsAdapter newsAdapter = new NewsAdapter();
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private NewsViewModel newsViewModel;
+    private ProgressBar loading_indicator;
+    private Button myProfileButton;
+    private NewsListener onNewsItemClickListener;
+    private NewsListener onMyProfileClickListener;
+
+    @Override
+    public void onAttach(@NotNull Context context) {
+        super.onAttach(context);
+
+        try {
+            onNewsItemClickListener = (NewsListener) context;
+            newsAdapter.setListener(onNewsItemClickListener);
+            onMyProfileClickListener = (NewsListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement one of NewsListener methods");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        onNewsItemClickListener = null;
+        onMyProfileClickListener = null;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,17 +64,29 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View peopleView = inflater.inflate(R.layout.fragment_start_screen, container, false);
-
-        initRecycler(peopleView);
-
+        View newsView = inflater.inflate(R.layout.fragment_news, container, false);
+        initUI(newsView);
+        initRecycler(newsView);
         initViewModel();
 
-        return peopleView;
+        return newsView;
+    }
+
+    private void initUI(View newsView) {
+        swipeRefreshLayout = newsView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            newsViewModel.loadNewsList();
+        });
+        loading_indicator = newsView.findViewById(R.id.loading_indicator);
+        loading_indicator.setVisibility(View.VISIBLE);
+        myProfileButton = newsView.findViewById(R.id.profile_button);
+        myProfileButton.setOnClickListener(view -> {
+            onMyProfileClickListener.onMyProfileClick();
+        });
     }
 
     private void initViewModel() {
-        NewsViewModel newsViewModel = new ViewModelProvider(this, new ViewModelFactory())
+        newsViewModel = new ViewModelProvider(this, new ViewModelFactory())
                 .get(NewsViewModel.class);
 
         getNewsData(newsViewModel);
@@ -52,18 +97,25 @@ public class NewsFragment extends Fragment {
     private void getNewsData(NewsViewModel newsViewModel) {
         newsViewModel.getResponse().observe(getActivity(), response -> {
             newsAdapter.setItems(response);
+            hideLoading();
         });
+    }
+
+    private void hideLoading() {
+        swipeRefreshLayout.setRefreshing(false);
+        loading_indicator.setVisibility(View.GONE);
     }
 
     private void getDataErrorMessage(NewsViewModel newsViewModel) {
         newsViewModel.getErrorMessage().observe(getActivity(), errorMessage -> {
+            hideLoading();
             Timber.e(errorMessage);
             Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_LONG).show();
         });
     }
 
-    private void initRecycler(View peopleView) {
-        newsList = peopleView.findViewById(R.id.news_list);
+    private void initRecycler(View newsView) {
+        newsList = newsView.findViewById(R.id.news_list);
         newsList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         newsList.setAdapter(newsAdapter);
     }
