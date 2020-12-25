@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import iot.mobile.R;
 import iot.mobile.presentation.SharedPreferens.SharedPrefs;
-import iot.mobile.presentation.callbacks.SignInListener;
+import iot.mobile.presentation.listeners.SignInListener;
 import iot.mobile.presentation.viewModels.SignInViewModel;
 
 public class SignInFragment extends Fragment {

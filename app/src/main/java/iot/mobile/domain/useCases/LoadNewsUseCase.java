@@ -1,3 +1,4 @@
+
 package iot.mobile.domain.useCases;
 
 import io.reactivex.Single;

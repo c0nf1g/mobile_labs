@@ -1,7 +1,6 @@
 package iot.mobile.presentation.fragments;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -9,7 +8,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +19,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
-
 import iot.mobile.R;
-import iot.mobile.presentation.callbacks.SignUpListener;
+import iot.mobile.presentation.listeners.SignUpListener;
 import iot.mobile.presentation.viewModels.SignUpViewModel;
 
 public class SignUpFragment extends Fragment {

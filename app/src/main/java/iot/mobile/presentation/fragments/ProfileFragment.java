@@ -19,8 +19,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.jetbrains.annotations.NotNull;
 
 import iot.mobile.R;
-import iot.mobile.presentation.callbacks.NewsListener;
-import iot.mobile.presentation.callbacks.ProfileListener;
+import iot.mobile.presentation.listeners.ProfileListener;
 import iot.mobile.presentation.viewModels.ProfileViewModel;
 
 public class ProfileFragment extends Fragment {

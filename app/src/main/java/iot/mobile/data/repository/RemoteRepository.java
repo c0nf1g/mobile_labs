@@ -2,6 +2,7 @@ package iot.mobile.data.repository;
 
 import io.reactivex.Single;
 import iot.mobile.data.RandomNewsService;
+import iot.mobile.domain.entity.Article;
 import iot.mobile.domain.entity.NewsData;
 import iot.mobile.domain.repository.IRepository;
 import okhttp3.OkHttpClient;

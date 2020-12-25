@@ -26,17 +26,17 @@ public class NewsViewModel extends ViewModel {
     public void loadNewsList() {
         NewsMapper mapper = new NewsMapper();
         compositeDisposable.add(
-            loadNewsUseCase.loadNews()
-                    .map(mapper::apply)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            data -> response.setValue(data),
-                            error -> {
-                                Timber.e(error);
-                                errorMessage.setValue(error.getMessage());
-                            }
-                    )
+                loadNewsUseCase.loadNews()
+                        .map(mapper::apply)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                data -> response.setValue(data),
+                                error -> {
+                                    Timber.e(error);
+                                    errorMessage.setValue(error.getMessage());
+                                }
+                        )
         );
     }
 

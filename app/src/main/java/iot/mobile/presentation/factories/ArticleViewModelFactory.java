@@ -7,15 +7,16 @@ import androidx.lifecycle.ViewModelProvider;
 import iot.mobile.data.repository.RemoteRepository;
 import iot.mobile.domain.repository.IRepository;
 import iot.mobile.domain.useCases.LoadNewsUseCase;
+import iot.mobile.presentation.viewModels.ArticleViewModel;
 import iot.mobile.presentation.viewModels.NewsViewModel;
 
-public class ViewModelFactory implements ViewModelProvider.Factory {
+public class ArticleViewModelFactory implements ViewModelProvider.Factory {
     private IRepository repository = new RemoteRepository();
     private LoadNewsUseCase loadNewsUseCase = new LoadNewsUseCase(repository);
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new NewsViewModel(loadNewsUseCase);
+        return (T) new ArticleViewModel(loadNewsUseCase);
     }
 }

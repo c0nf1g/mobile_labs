@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iot.mobile.R;
-import iot.mobile.presentation.callbacks.NewsListener;
+import iot.mobile.presentation.listeners.NewsListener;
 import iot.mobile.presentation.uiData.NewsViewData;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {

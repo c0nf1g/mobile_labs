@@ -14,16 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
 import iot.mobile.R;
-import iot.mobile.presentation.callbacks.NewsListener;
-import iot.mobile.presentation.factories.ViewModelFactory;
+import iot.mobile.presentation.helpers.AlertManager;
+import iot.mobile.presentation.listeners.NewsListener;
 import iot.mobile.presentation.holders.NewsAdapter;
 import iot.mobile.presentation.viewModels.NewsViewModel;
-import timber.log.Timber;
+import iot.mobile.presentation.factories.ViewModelFactory;
 
 public class NewsFragment extends Fragment {
     private RecyclerView newsList;
@@ -34,6 +33,7 @@ public class NewsFragment extends Fragment {
     private Button myProfileButton;
     private NewsListener onNewsItemClickListener;
     private NewsListener onMyProfileClickListener;
+    private AlertManager alertManager = new AlertManager(getActivity());
 
     @Override
     public void onAttach(@NotNull Context context) {
@@ -109,8 +109,10 @@ public class NewsFragment extends Fragment {
     private void getDataErrorMessage(NewsViewModel newsViewModel) {
         newsViewModel.getErrorMessage().observe(getActivity(), errorMessage -> {
             hideLoading();
-            Timber.e(errorMessage);
-            Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_LONG).show();
+            alertManager.showAlertDialog(
+                    "Error",
+                    "Failed to load news!"
+            );
         });
     }
 

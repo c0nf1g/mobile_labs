@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
 import iot.mobile.R;
 import iot.mobile.presentation.uiData.NewsViewData;
+import timber.log.Timber;
 
 public class ArticleActivity extends AppCompatActivity {
     private NewsViewData newsViewData;
@@ -24,6 +26,7 @@ public class ArticleActivity extends AppCompatActivity {
     private static final String NEWS_VIEW_DATA_KEY = "newsViewData";
 
     public static void start(Context context, NewsViewData newsViewData) {
+        Timber.i("Starter Activity");
         Intent starter = new Intent(context, ArticleActivity.class);
         starter.putExtra(NEWS_VIEW_DATA_KEY, newsViewData);
         context.startActivity(starter);
