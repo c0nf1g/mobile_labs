@@ -11,8 +11,10 @@ import iot.mobile.BuildConfig;
 import iot.mobile.R;
 import iot.mobile.presentation.SharedPreferens.SharedPrefs;
 import iot.mobile.presentation.activities.StartScreenActivity;
-import iot.mobile.presentation.callbacks.SignInListener;
-import iot.mobile.presentation.callbacks.SignUpListener;
+import iot.mobile.presentation.listeners.ConnectionChangeCallback;
+import iot.mobile.presentation.listeners.NetworkChangeListener;
+import iot.mobile.presentation.listeners.SignInListener;
+import iot.mobile.presentation.listeners.SignUpListener;
 import iot.mobile.presentation.fragments.SignInFragment;
 import iot.mobile.presentation.fragments.SignUpFragment;
 import iot.mobile.presentation.helpers.LanguageManager;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if (language.equals(UA_LANGUAGE)) {
             languageManager.setLanguage(UA_LANGUAGE, configuration, this);
-        } else if (!language.equals(US_LANGUAGE)) {
+        } else if (language.equals(US_LANGUAGE)) {
             sharedPrefs.setLanguage(US_LANGUAGE);
         }
     }
